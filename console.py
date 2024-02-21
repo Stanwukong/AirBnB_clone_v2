@@ -121,35 +121,35 @@ class HBNBCommand(cmd.Cmd):
 	Value syntax: "<value>"
         """
         try:
-	    if not args:
-	        raise SyntaxError()
-	    my_items = args.split(" ")
+            if not args:
+                raise SyntaxError()
+            my_items = args.split(" ")
 
-	    kwargs = {}
-	    for i in range(1, len(my_items)):
-		    key, value = tuple(my_items[i].split("="))
-		    if value[0] == '"':
-		        value = value.strip('"').replace("_", " ")
-		    else:
-		        try:
-		            value = eval(value)
-		        except (SyntaxError, NameError):
-			    continue
-	            kwargs[key] = value
+            kwargs = {}
+            for i in range(1, len(my_items)):
+                key, value = tuple(my_items[i].split("="))
+                if value[0] == '"':
+                    value = value.strip('"').replace("_", " ")
+                else:
+                    try:
+                        value = eval(value)
+                    except (SyntaxError, NameError):
+                        continue
+                kwargs[key] = value
 
-	     if kwargs = {}:
-	         obj = eval(my_items[0])()
-	     else:
-	         obj = eval(my_items[0])(**kwargs)
-	         storage.new(obj)
+            if kwargs == {}:
+                obj = eval(my_items[0])()
+            else:
+                obj = eval(my_items[0])(**kwargs)
+                storage.new(obj)
 	     
-	     print(obj.id)
-	     obj.save()
+            print(obj.id)
+            obj.save()
 
-	except SyntaxError:
-	    print("** class name missing **")
-	except NameError:
-	    print("** class doesn't exist **")
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
 
         new_instance = HBNBCommand.classes[args]()
         storage.save()
