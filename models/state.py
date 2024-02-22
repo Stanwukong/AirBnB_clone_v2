@@ -8,7 +8,6 @@ from sqlalchemy.orm import relationship
 from os import getenv
 
 
-
 class State(BaseModel, Base):
     """
     Represents a state in the MySQL database
